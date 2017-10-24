@@ -2,31 +2,31 @@ def read_cook_book():
     cook_book = {}
 
     with open('list_of_recipes.txt', 'rt', encoding='utf-8') as file:
-        key = ''
-        ingredients_total = 0
+        key = None
+        ingredients_total = None
         ingredients_processed = 0
         all_ingredients_list = []
 
         for line in file:
             if line[0] != '#' and line[0] != '\n':
                 line = line.strip('\n').lower()
-                if key == '':
+                if not key:
                     key = line
-                elif ingredients_total == 0:
+                elif not ingredients_total:
                     ingredients_total = int(line)
                 elif ingredients_processed != ingredients_total:
                     ingredients_processed += 1
                     current_ingredient_list = line.split('|')
                     all_ingredients_list.append({
-                        'ingredient_name' : current_ingredient_list[0],
-                        'quantity' : current_ingredient_list[1],
-                        'measure' : current_ingredient_list[2]
+                        'ingredient_name' : current_ingredient_list[0].strip(),
+                        'quantity' : int(current_ingredient_list[1].strip()),
+                        'measure' : current_ingredient_list[2].strip()
                     })
 
                     if ingredients_processed == ingredients_total:
                         cook_book[key] = all_ingredients_list
-                        key = ''
-                        ingredients_total = 0
+                        key = None
+                        ingredients_total = None
                         ingredients_processed = 0
                         all_ingredients_list = []
 
