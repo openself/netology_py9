@@ -12,13 +12,8 @@ def print_top_ten_words():
             data_decoded = data_raw.decode(result['encoding'])
 
             big_words = [word for word in data_decoded.split() if len(word) > 6]
-            top_words_list = Counter(big_words).most_common(10)
-
-            string_top_words = ''
-            for top_word in top_words_list:
-                string_top_words += top_word[0] + ', '
-            string_top_words = string_top_words[: -2]
-
+            top_words_list = [word_counter[0] for word_counter in Counter(big_words).most_common(10)]
+            string_top_words = ", ".join(top_words_list)
             print(current_file, ' - топ 10 слов:', string_top_words)
 
 
