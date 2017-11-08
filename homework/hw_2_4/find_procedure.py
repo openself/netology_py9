@@ -38,15 +38,8 @@
 import os
 import re
 
-migrations = 'Migrations'
-current_dir = os.path.dirname(os.path.abspath(__file__))
-search_dir = os.path.join(current_dir, migrations)
-all_sql_files = [os.path.join(search_dir, name) for name in os.listdir(search_dir) if name.endswith('.sql')]
-found_files_set = set()
-
-def search_text(text_for_search):
+def search_text(text_for_search, found_files_set):
     '''Осуществляет поиск текста в файлах sql'''
-    global found_files_set
 
     if not found_files_set:
         search_source = all_sql_files
@@ -76,7 +69,12 @@ def search_text(text_for_search):
 
 
 if __name__ == '__main__':
-    # ваша логика
+    migrations = 'Migrations'
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    search_dir = os.path.join(current_dir, migrations)
+    all_sql_files = [os.path.join(search_dir, name) for name in os.listdir(search_dir) if name.endswith('.sql')]
+    found_files_set = set()
+
     while True:
         text_for_search = input('Введите строку: ')
-        search_text(text_for_search)
+        search_text(text_for_search, found_files_set)
