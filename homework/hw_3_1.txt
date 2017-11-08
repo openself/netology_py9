@@ -1,2 +1,2 @@
 Прохождение теста: время окончания 01.11.2017 в 15:17
-[x for x in mass if x > 0 and not (x % 3 or x % 4)]
+[x**3 for x in mass if x > 0 and not (x % 3 or x % 4)]
