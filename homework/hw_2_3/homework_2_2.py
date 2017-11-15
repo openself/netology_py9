@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from collections import Counter
 import json
 
+
 def print_top_ten_words_json():
     'Выводит топ 10 самых часто встречающихся в новостях слов длиннее 6 символов для каждого json-файла'
     json_files = [name for name in os.listdir('.') if name.endswith('.json')]
