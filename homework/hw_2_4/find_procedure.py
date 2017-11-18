@@ -38,43 +38,38 @@
 import os
 import re
 
+
 def search_text(text_for_search, found_files_set):
     '''Осуществляет поиск текста в файлах sql'''
-
-    if not found_files_set:
-        search_source = all_sql_files
-    else:
-        search_source = found_files_set.copy()
-    found_files_set.clear()
-
+    found_files_result = set()
     search_pattern = re.compile(text_for_search, re.IGNORECASE)
 
-    for current_file in search_source:
+    for current_file in found_files_set:
         with open(current_file) as file:
             source = file.read()
             if re.search(search_pattern, source):
-                found_files_set.add(current_file)
+                found_files_result.add(current_file)
 
-    total_found = len(found_files_set)
+    total_found = len(found_files_result)
     if not total_found:
         print('Совпадений не найдено.')
-        return
     elif total_found < 6:
-        for found_file in found_files_set:
+        for found_file in found_files_result:
             print(found_file)
+            print('Всего: {0}'.format(total_found))
     else:
         print('... большой список файлов ...')
+        print('Всего: {0}'.format(total_found))
 
-    print('Всего: {0}'.format(total_found))
+    return found_files_result
 
 
 if __name__ == '__main__':
     migrations = 'Migrations'
     current_dir = os.path.dirname(os.path.abspath(__file__))
     search_dir = os.path.join(current_dir, migrations)
-    all_sql_files = [os.path.join(search_dir, name) for name in os.listdir(search_dir) if name.endswith('.sql')]
-    found_files_set = set()
+    found_files_set = set(os.path.join(search_dir, name) for name in os.listdir(search_dir) if name.endswith('.sql'))
 
     while True:
         text_for_search = input('Введите строку: ')
-        search_text(text_for_search, found_files_set)
+        found_files_set = search_text(text_for_search, found_files_set)
