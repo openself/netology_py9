@@ -9,7 +9,8 @@ auth_data = {
     'client_id': APP_ID
 }
 
-TOKEN = 'AQAAAAAADaHfAASsSVibd0KuRkLnifGLbrCdIhs'
+# Нужно подставить реальный токен вместо заглушки
+TOKEN = '12345'
 
 
 class YMBase():
