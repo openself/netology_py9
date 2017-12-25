@@ -85,6 +85,7 @@ def get_user_groups(user_id, progress_gen):
             if not groups_list:
                 print('У выбранного пользователя нет групп ВК.')
 
+    print(f'\nКоличество групп пользователя: {len(groups_list)}')
     return groups_list
 
 
@@ -109,6 +110,7 @@ def get_user_friends(user_id, progress_gen):
             if not friends_list:
                 print('У выбранного пользователя нет друзей ВК.')
 
+    print(f'\nКоличество друзей пользователя: {len(friends_list)}')
     return friends_list
 
 
@@ -148,6 +150,7 @@ def is_there_any_friend(group_id, friends_list, progress_gen):
                         if item['member'] == 1:
                             result = True
                             break
+                    break
             else:
                 break
         # Если нашли в группе хотя бы одного друга, дальше не ищем
